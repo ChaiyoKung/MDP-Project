@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <!-- My Theme -->
+    <color name="primary_200">#d7546e</color>
+    <color name="primary_500">#c60c30</color>
+    <color name="primary_700">#9e0a26</color>
+    <color name="secondary_200">#4c71a0</color>
+    <color name="secondary_500">#003478</color>
+    <color name="secondary_700">#002a60</color>
+    <color name="light_600">#e6e6e6</color>
+    <color name="light_700">#cccccc</color>
+    <color name="dark_500">#252525</color>
+    <color name="dark_600">#212121</color>
+    <color name="dark_700">#1e1e1e</color>
+</resources>

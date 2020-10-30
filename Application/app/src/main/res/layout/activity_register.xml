@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".RegisterActivity">
+
+    <EditText
+        android:id="@+id/edt_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ชื่อผู้ใช้งาน"
+        android:inputType="textShortMessage" />
+
+    <EditText
+        android:id="@+id/edt_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="รหัสผ่าน"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/edt_confpass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ยืนยันรหัสผ่าน"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/edt_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="อีเมล"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/edt_fname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ชื่อ"
+        android:inputType="textShortMessage" />
+
+    <EditText
+        android:id="@+id/edt_lname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="สกุล"
+        android:inputType="textShortMessage" />
+
+    <EditText
+        android:id="@+id/edt_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ที่อยู่"
+        android:inputType="textLongMessage" />
+
+    <EditText
+        android:id="@+id/edt_tel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="เบอร์โทรศัพท์"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/edt_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ลิงก์รูปภาพประจำตัว (ไม่จำเป็น)"
+        android:inputType="textLongMessage" />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="สมัครสมาชิก" />
+
+</LinearLayout>

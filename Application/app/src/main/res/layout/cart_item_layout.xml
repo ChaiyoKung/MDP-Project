@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_bottom"
+        android:paddingVertical="8dp">
+
+        <ImageView
+            android:id="@+id/iv_order_detail_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/light_700"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tv_order_detail_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@id/tv_order_detail_price"
+            android:layout_toRightOf="@id/iv_order_detail_image"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="Product name"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_order_detail_price"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@id/tv_order_detail_amount"
+            android:text="50" />
+
+        <TextView
+            android:id="@+id/tv_order_detail_amount"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@id/tv_order_detail_total"
+            android:text="x 2" />
+
+        <TextView
+            android:id="@+id/tv_order_detail_total"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:text="100"
+            android:textColor="@color/black" />
+    </RelativeLayout>
+</RelativeLayout>
