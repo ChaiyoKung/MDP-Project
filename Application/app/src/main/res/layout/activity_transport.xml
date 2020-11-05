@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".TransportActivity">
+
+    <ScrollView
+        android:id="@+id/layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/layout_bottom"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ที่อยู่ที่จัดส่ง" />
+
+            <EditText
+                android:id="@+id/edt_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ที่อยู่" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="รูปแบบการจัดส่ง" />
+
+            <RadioGroup
+                android:id="@+id/rd_transport_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rd_transport_item1"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="ไปรษณีย์ไทย - ลงทะเบียน   +30 บาท" />
+
+                <RadioButton
+                    android:id="@+id/rd_transport_item2"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="ไปรษณีย์ไทย - EMS   +40 บาท" />
+
+                <RadioButton
+                    android:id="@+id/rd_transport_item3"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="Kerry Express   +45 บาท" />
+            </RadioGroup>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/border_top"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="3dp">
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="รวม 0 บาท"
+            android:textColor="@color/primary_500"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="บันทึก" />
+    </RelativeLayout>
+</RelativeLayout>

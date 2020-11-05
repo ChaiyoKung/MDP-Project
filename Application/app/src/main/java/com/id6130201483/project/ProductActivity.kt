@@ -12,6 +12,7 @@ import com.id6130201483.project.api.ProductActivityAPI
 import com.id6130201483.project.dataclass.OrderDetail
 import com.id6130201483.project.dataclass.OrderIDForCustomer
 import com.id6130201483.project.dataclass.Product
+import com.id6130201483.project.dataclass.ProductAmountUpdate
 import com.id6130201483.project.savedata.CustomerStore
 import kotlinx.android.synthetic.main.activity_product.*
 import retrofit2.Call
@@ -53,19 +54,12 @@ class ProductActivity : AppCompatActivity() {
         }
 
         btn_addToCart.setOnClickListener {
-            println(":::::::::::;;; OrderID $currentOrderID")
-            println(":::::::::::;;; ProductID $currentProductID")
-            println(":::::::::::;;; Amount ${tv_amount.text.toString().toInt()}")
             if (currentOrderID != null) {
                 checkProductInCart(
                     currentOrderID!!,
                     currentProductID!!,
                     tv_amount.text.toString().toInt()
                 )
-            } else {
-                println("::::::::::: Not found OrderID")
-//                Create new order
-//                Call getOrderID
             }
         }
     }
@@ -87,6 +81,14 @@ class ProductActivity : AppCompatActivity() {
                 clickCart()
                 true
             }
+            R.id.menu_order_has_transport -> {
+                clickOrderHasTransport()
+                true
+            }
+            R.id.menu_history -> {
+                clickHistory()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -105,6 +107,7 @@ class ProductActivity : AppCompatActivity() {
                     tv_product_name.text = item?.product_name
                     tv_product_detail.text = item?.product_detail
                     tv_product_price.text = "${item?.product_price} บาท"
+                    tv_product_amount.text = "/${item?.product_amount}"
                 }
             }
 
@@ -128,13 +131,22 @@ class ProductActivity : AppCompatActivity() {
             override fun onFailure(call: Call<OrderIDForCustomer>, t: Throwable) {
                 t.printStackTrace()
             }
-
         })
     }
 
 
     private fun clickCart() {
         val intent = Intent(this, CartActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun clickOrderHasTransport() {
+        val intent = Intent(this, OrderHasTransportActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun clickHistory() {
+        val intent = Intent(this, OrderHistoryActivity::class.java)
         startActivity(intent)
     }
 
@@ -164,7 +176,7 @@ class ProductActivity : AppCompatActivity() {
             .enqueue(object : Callback<OrderDetail> {
                 override fun onResponse(call: Call<OrderDetail>, response: Response<OrderDetail>) {
                     if (response.isSuccessful) {
-                        Toast.makeText(this@ProductActivity, "อัปเดทสินค้าในตะกร้าสำเร็จ", Toast.LENGTH_SHORT).show()
+                        updateProductAmount(pid, pamt, "อัปเดทสินค้าในตะกร้าสำเร็จ")
                     } else {
                         addToCart(oid, pid, pamt)
                     }
@@ -173,7 +185,6 @@ class ProductActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<OrderDetail>, t: Throwable) {
                     t.printStackTrace()
                 }
-
             })
     }
 
@@ -181,11 +192,7 @@ class ProductActivity : AppCompatActivity() {
         productAPI.insertOrderDetail(oid, pid, pamt).enqueue(object : Callback<OrderDetail> {
             override fun onResponse(call: Call<OrderDetail>, response: Response<OrderDetail>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(
-                        this@ProductActivity,
-                        "เพิ่มลงในตะกร้าสำเร็จ",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    updateProductAmount(pid, pamt, "เพิ่มลงในตะกร้าสำเร็จ")
                 }
             }
 
@@ -194,5 +201,25 @@ class ProductActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun updateProductAmount(pid: Int, numberForCal: Int, toastSuccessText: String) {
+        val newAmount = currentAmount!! + (numberForCal * -1)
+        productAPI.updateProductAmount(pid, newAmount)
+            .enqueue(object : Callback<ProductAmountUpdate> {
+                override fun onResponse(
+                    call: Call<ProductAmountUpdate>,
+                    response: Response<ProductAmountUpdate>
+                ) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@ProductActivity, toastSuccessText, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+
+                override fun onFailure(call: Call<ProductAmountUpdate>, t: Throwable) {
+                    t.printStackTrace()
+                }
+            })
     }
 }

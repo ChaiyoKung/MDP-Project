@@ -50,6 +50,14 @@ class IndexActivity : AppCompatActivity() {
                 clickCart()
                 true
             }
+            R.id.menu_order_has_transport -> {
+                clickOrderHasTransport()
+                true
+            }
+            R.id.menu_history -> {
+                clickHistory()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -57,6 +65,16 @@ class IndexActivity : AppCompatActivity() {
     private fun clickCart() {
         val intent = Intent(this, CartActivity::class.java)
         intent.putExtra("cusData", cusParcel)
+        startActivity(intent)
+    }
+
+    private fun clickOrderHasTransport() {
+        val intent = Intent(this, OrderHasTransportActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun clickHistory() {
+        val intent = Intent(this, OrderHistoryActivity::class.java)
         startActivity(intent)
     }
 }

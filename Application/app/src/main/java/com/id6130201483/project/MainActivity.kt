@@ -7,13 +7,18 @@ import android.widget.Toast
 import com.id6130201483.project.dataclass.Customer
 import com.id6130201483.project.dataclass.Employee
 import com.id6130201483.project.api.MainActivityAPI
+import com.id6130201483.project.dataclass.CreateNewOrder
+import com.id6130201483.project.dataclass.Order
 import com.id6130201483.project.encrypt.Encrypt
 import com.id6130201483.project.parcelable.CustomerParcel
 import com.id6130201483.project.savedata.CustomerStore
+import com.id6130201483.project.savedata.UserTypeStore
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class MainActivity : AppCompatActivity() {
     private val mainAPI = MainActivityAPI.create()
@@ -41,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             val enP = Encrypt.encryptString(p)
 
             val us = u.split("-")
-            if (us[0] == "KRS" && us[us.size - 1] == "99") {
+            if (us[0] == "KRG" && us[us.size - 1] == "99") {
                 loginEmp(u, enP)
             } else {
                 loginCus(u, enP)
@@ -64,18 +69,16 @@ class MainActivity : AppCompatActivity() {
         mainAPI.loginEmp(u, p).enqueue(object : Callback<Employee> {
             override fun onResponse(call: Call<Employee>, response: Response<Employee>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "เข้าสู่ระบบสำเร็จ",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    UserTypeStore.type = "emp"
+                    val intent = Intent(this@MainActivity, EmpHomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
             }
 
             override fun onFailure(call: Call<Employee>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "ไม่พบผู้ใช้งาน", Toast.LENGTH_LONG).show()
             }
-
         })
     }
 
@@ -94,6 +97,8 @@ class MainActivity : AppCompatActivity() {
                     val tel = rb?.cus_tel.toString()
                     val image = rb?.cus_image.toString()
 
+                    checkCustomerOrder(id)
+
                     CustomerStore.setData(
                         id,
                         username,
@@ -104,7 +109,7 @@ class MainActivity : AppCompatActivity() {
                         tel,
                         image
                     )
-
+                    UserTypeStore.type = "cus"
                     val intent = Intent(this@MainActivity, IndexActivity::class.java)
                     intent.putExtra(
                         "cusData",
@@ -121,15 +126,52 @@ class MainActivity : AppCompatActivity() {
                     )
                     startActivity(intent)
                     finish()
-                } else {
-                    println("::::: fun loginCus unsuccessfully")
                 }
             }
 
             override fun onFailure(call: Call<Customer>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "ไม่พบผู้ใช้งาน", Toast.LENGTH_LONG).show()
-//                println(t.printStackTrace())
+                t.printStackTrace()
             }
+        })
+    }
+
+    private fun getMyDateNow(): String {
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        return current.format(formatter)
+    }
+
+    private fun checkCustomerOrder(cid: Int) {
+        mainAPI.checkCustomerOrder(cid).enqueue(object : Callback<Order> {
+            override fun onResponse(call: Call<Order>, response: Response<Order>) {
+                if (response.isSuccessful) {
+                    // Already have order
+                }
+            }
+
+            override fun onFailure(call: Call<Order>, t: Throwable) {
+                // Don't have order
+                // Create first order
+                createNewOrderIfFirst(cid, "2020-99-99")
+            }
+
+        })
+    }
+
+    private fun createNewOrderIfFirst(cid: Int, oDate: String) {
+        println(":::::::::: CREATE NEW ORDER")
+        mainAPI.createNewOrder(cid, oDate).enqueue(object : Callback<CreateNewOrder> {
+            override fun onResponse(
+                call: Call<CreateNewOrder>,
+                response: Response<CreateNewOrder>
+            ) {
+            }
+
+            override fun onFailure(call: Call<CreateNewOrder>, t: Throwable) {
+                println(":::::::::::: CREATE FIRST ORDER FAIL")
+//                t.printStackTrace()
+            }
+
         })
     }
 }

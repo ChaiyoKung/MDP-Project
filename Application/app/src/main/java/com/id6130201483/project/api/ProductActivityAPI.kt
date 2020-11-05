@@ -3,6 +3,7 @@ package com.id6130201483.project.api
 import com.id6130201483.project.dataclass.OrderDetail
 import com.id6130201483.project.dataclass.OrderIDForCustomer
 import com.id6130201483.project.dataclass.Product
+import com.id6130201483.project.dataclass.ProductAmountUpdate
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -27,7 +28,6 @@ interface ProductActivityAPI {
         @Path("cid") cid: Int
     ): Call<OrderIDForCustomer>
 
-//    @FormUrlEncoded
     @PUT("update-product-in-order-detail/{oid}/{pid}/{pamt}")
     fun updateProductInOrderDetail(
         @Path("oid") oid: Int,
@@ -42,4 +42,11 @@ interface ProductActivityAPI {
         @Field("product_id") product_id: Int,
         @Field("order_detail_product_amount") order_detail_product_amount: Int
     ): Call<OrderDetail>
+
+    @FormUrlEncoded
+    @PUT("update-product-amount/{pid}")
+    fun updateProductAmount(
+        @Path("pid") pid: Int,
+        @Field("product_amount") product_amount: Int
+    ): Call<ProductAmountUpdate>
 }

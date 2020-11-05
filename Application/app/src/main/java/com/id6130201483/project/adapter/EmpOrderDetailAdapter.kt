@@ -1,45 +1,20 @@
 package com.id6130201483.project.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.view.*
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.id6130201483.project.ProductActivity
 import com.id6130201483.project.R
 import com.id6130201483.project.dataclass.ProductInCart
-import com.id6130201483.project.savedata.OrderDetailStore
 import com.id6130201483.project.viewholder.CartViewHolder
 
-class OrderDetailAdapter(val items: List<ProductInCart>, val context: Context) :
+class EmpOrderDetailAdapter(val items: List<ProductInCart>, val context: Context) :
     RecyclerView.Adapter<CartViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): CartViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         val viewItem =
             LayoutInflater.from(parent.context).inflate(R.layout.cart_item_layout, parent, false)
         val myHolder = CartViewHolder(viewItem)
-
-        viewItem.setOnClickListener {
-            val pos = myHolder.adapterPosition
-            val context = parent.context
-            val item = items[pos]
-
-            val intent = Intent(context, ProductActivity::class.java)
-            intent.putExtra("pid", item.product_id)
-            context.startActivity(intent)
-        }
-
-        viewItem.setOnLongClickListener {
-            val pos = myHolder.adapterPosition
-            val item = items[pos]
-
-            OrderDetailStore.pid = item.product_id
-            OrderDetailStore.oamt = item.order_detail_product_amount
-
-            it.showContextMenu()
-        }
 
         return myHolder
     }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.id6130201483.project.R
@@ -27,10 +28,17 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
+
         root.btn_search.setOnClickListener {
             searchProduct(root.edt_search.text.toString())
         }
+
+        root.edt_search.addTextChangedListener {
+            searchProduct(root.edt_search.text.toString())
+        }
+
         root.rev_product_list.layoutManager = GridLayoutManager(context, 2)
+
         return root
     }
 

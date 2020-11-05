@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project</string>
+    <string name="app_name">Korea Goal</string>
     <string name="title_activity_index">IndexActivity</string>
     <string name="title_home">หน้าแรก</string>
     <string name="title_profile">ข้อมูลส่วนตัว</string>

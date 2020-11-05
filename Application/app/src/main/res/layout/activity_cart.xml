@@ -11,7 +11,7 @@
         android:id="@+id/layout_product_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/layout_bottom"
+        android:layout_above="@id/layout_transport"
         android:layout_alignParentTop="true">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -19,6 +19,57 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_transport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/layout_bottom"
+        android:background="@drawable/border_top"
+        android:padding="8dp">
+
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@id/tv_arrow"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="บ้านเลขที่ หมู่บ้าน ซอย ตำบล อำเภอ จังหวัด 00000" />
+
+        <TextView
+            android:id="@+id/tv_transport_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_address"
+            android:layout_alignParentLeft="true"
+            android:text="รูปแบบการจัดส่ง"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_transport_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_address"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@id/tv_arrow"
+            android:text="0 บาท"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:text=">"
+            android:textAlignment="center" />
+
     </RelativeLayout>
 
     <RelativeLayout

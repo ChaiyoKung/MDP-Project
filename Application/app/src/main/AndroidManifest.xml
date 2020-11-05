@@ -12,7 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CartActivity"></activity>
+        <activity android:name=".OrderHistoryActivity"></activity>
+        <activity android:name=".OrderHasTransportActivity" />
+        <activity android:name=".EmpOrderDetailActivity" />
+        <activity android:name=".EmpShowCusOrderActivity" />
+        <activity android:name=".EmpProductActivity" />
+        <activity android:name=".EmpHomeActivity" />
+        <activity android:name=".EditProfileActivity" />
+        <activity android:name=".TransportActivity" />
+        <activity android:name=".PaymentActivity" />
+        <activity android:name=".CartActivity" />
         <activity android:name=".ImageActivity" />
         <activity android:name=".ProductActivity" />
         <activity

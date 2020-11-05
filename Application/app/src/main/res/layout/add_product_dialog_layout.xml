@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="8dp"
+    android:paddingTop="8dp">
+
+    <ImageView
+        android:id="@+id/dialog_show_product_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/dark_700"
+        android:scaleType="centerCrop" />
+
+    <EditText
+        android:id="@+id/dialog_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textShortMessage"
+        android:hint="ชื่อ" />
+
+    <EditText
+        android:id="@+id/dialog_product_detail"
+        android:layout_width="match_parent"
+        android:inputType="textShortMessage"
+        android:layout_height="wrap_content"
+        android:hint="รายละเอียด" />
+
+    <EditText
+        android:id="@+id/dialog_product_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="จำนวน"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/dialog_product_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ราคา"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/dialog_product_image"
+        android:layout_width="match_parent"
+        android:inputType="textLongMessage"
+        android:layout_height="wrap_content"
+        android:hint="ลิงก์รูปภาพ" />
+
+    <Button
+        android:id="@+id/dialog_btn_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="เพิ่มสินค้า" />
+</LinearLayout>
