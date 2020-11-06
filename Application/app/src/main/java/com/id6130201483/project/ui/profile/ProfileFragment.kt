@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.id6130201483.project.EditProfileActivity
+import com.id6130201483.project.ImageActivity
 import com.id6130201483.project.R
 import com.id6130201483.project.api.ProfileFragmentAPI
 import com.id6130201483.project.dataclass.Customer
@@ -20,15 +21,22 @@ import retrofit2.Response
 
 class ProfileFragment : Fragment() {
     val profileAPI = ProfileFragmentAPI.create()
+    var imageURL: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        root.iv_profile_image.setOnClickListener {
+            clickProfile(imageURL)
+        }
+
         root.btn_edit.setOnClickListener {
             clickEdit()
         }
+
         return root
     }
 
@@ -42,13 +50,27 @@ class ProfileFragment : Fragment() {
         startActivity(intent)
     }
 
+    private fun clickProfile(imgURL: String) {
+        val intent = Intent(context, ImageActivity::class.java)
+        intent.putExtra("imageURL", imgURL)
+        startActivity(intent)
+    }
+
     private fun callCustomer(cid: Int) {
         profileAPI.selectCustomer(cid).enqueue(object : Callback<Customer> {
             override fun onResponse(call: Call<Customer>, response: Response<Customer>) {
                 if (response.isSuccessful) {
                     val body = response.body()
 
-                    Glide.with(this@ProfileFragment).load(body?.cus_image).into(iv_profile_image)
+                    // If customer don't have profile image
+                    if (body?.cus_image.isNullOrEmpty()) {
+                        iv_profile_image.setImageDrawable(context?.getDrawable(R.drawable.profile_default))
+                    } else {
+                        // Customer have profile image
+                        imageURL = body?.cus_image.toString()
+                        Glide.with(this@ProfileFragment).load(body?.cus_image)
+                            .into(iv_profile_image)
+                    }
                     tv_profile_username.text = body?.cus_username
                     tv_profile_address.text = body?.cus_address
                     tv_profile_name.text = "${body?.cus_fname} ${body?.cus_lname}"

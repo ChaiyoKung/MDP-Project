@@ -3,6 +3,8 @@ package com.id6130201483.project
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import com.bumptech.glide.Glide
 import com.id6130201483.project.dataclass.Customer
 import com.id6130201483.project.api.RegisterActivityAPI
 import com.id6130201483.project.encrypt.Encrypt
@@ -21,6 +23,10 @@ class RegisterActivity : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar!!.title = "สมัครสมาชิก"
         actionBar.setDisplayHomeAsUpEnabled(true)
+
+        edt_image.addTextChangedListener {
+            Glide.with(this).load(edt_image.text.toString()).into(iv_profile_image)
+        }
 
         btn_register.setOnClickListener {
             clickRegister()

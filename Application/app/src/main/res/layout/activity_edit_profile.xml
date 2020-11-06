@@ -57,8 +57,17 @@
                         android:id="@+id/edt_profile_image"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="textUri"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/btn_clear_image_url"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ล้างลิงก์รูปภาพ"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/secondary_500" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -97,6 +106,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="สกุล" />
 
                 <EditText

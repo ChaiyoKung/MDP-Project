@@ -21,7 +21,7 @@ class OrderHasTransportActivity : AppCompatActivity() {
         setContentView(R.layout.activity_order_has_transport)
 
         val actionBar = supportActionBar
-        actionBar!!.title = "รายการที่ต้องได้รับ"
+        actionBar!!.title = "รายการที่กำลังจัดส่ง"
         actionBar.setDisplayHomeAsUpEnabled(true)
 
         rev_cus_order.layoutManager = LinearLayoutManager(applicationContext)

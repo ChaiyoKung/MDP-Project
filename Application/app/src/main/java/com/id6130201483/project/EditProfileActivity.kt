@@ -1,5 +1,6 @@
 package com.id6130201483.project
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -23,6 +24,10 @@ class EditProfileActivity : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar!!.title = "แก้ไขข้อมูลส่วนตัว"
         actionBar.setDisplayHomeAsUpEnabled(true)
+
+        btn_clear_image_url.setOnClickListener {
+            clearImageURL()
+        }
 
         edt_profile_image.addTextChangedListener {
             Glide.with(this@EditProfileActivity).load(edt_profile_image.text.toString())
@@ -101,7 +106,10 @@ class EditProfileActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<Customer>, t: Throwable) {
                     t.printStackTrace()
                 }
-
             })
+    }
+
+    private fun clearImageURL() {
+        edt_profile_image.text.clear()
     }
 }
