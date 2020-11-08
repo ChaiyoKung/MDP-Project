@@ -138,15 +138,46 @@ class EmpHomeActivity : AppCompatActivity() {
         val alertDialog = builder.show()
 
         alertDialog.dialog_btn_add.setOnClickListener {
-            insertProduct(
-                alertDialog.dialog_product_name.text.toString(),
-                alertDialog.dialog_product_detail.text.toString(),
-                alertDialog.dialog_product_amount.text.toString().toInt(),
-                alertDialog.dialog_product_price.text.toString().toInt(),
-                alertDialog.dialog_product_image.text.toString()
-            )
-            alertDialog.dismiss()
-            callProduct()
+            fun isFormValid(): Boolean {
+                fun notValidToast(text: String) {
+                    Toast.makeText(this, "กรุณากรอก${text}สินค้า", Toast.LENGTH_SHORT).show()
+                }
+
+                if (alertDialog.dialog_product_name.text.isNullOrEmpty()) {
+                    notValidToast("ชื่อ")
+                    alertDialog.dialog_product_name.requestFocus()
+                    return false
+                } else if (alertDialog.dialog_product_detail.text.isNullOrEmpty()) {
+                    notValidToast("รายละเอียด")
+                    alertDialog.dialog_product_detail.requestFocus()
+                    return false
+                } else if (alertDialog.dialog_product_amount.text.isNullOrEmpty()) {
+                    notValidToast("จำนวน")
+                    alertDialog.dialog_product_amount.requestFocus()
+                    return false
+                } else if (alertDialog.dialog_product_price.text.isNullOrEmpty()) {
+                    notValidToast("ราคา")
+                    alertDialog.dialog_product_price.requestFocus()
+                    return false
+                } else if (alertDialog.dialog_product_image.text.isNullOrEmpty()) {
+                    notValidToast("ลิงก์รูปภาพ")
+                    alertDialog.dialog_product_image.requestFocus()
+                    return false
+                }
+                return true
+            }
+
+            if (isFormValid()) {
+                insertProduct(
+                    alertDialog.dialog_product_name.text.toString(),
+                    alertDialog.dialog_product_detail.text.toString(),
+                    alertDialog.dialog_product_amount.text.toString().toInt(),
+                    alertDialog.dialog_product_price.text.toString().toInt(),
+                    alertDialog.dialog_product_image.text.toString()
+                )
+                alertDialog.dismiss()
+                callProduct()
+            }
         }
 
         alertDialog.dialog_product_image.addTextChangedListener {

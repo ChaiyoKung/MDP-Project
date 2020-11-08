@@ -19,32 +19,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@color/white"
+            android:background="@drawable/border_bottom"
             android:gravity="center"
+            android:paddingHorizontal="8dp"
             android:paddingTop="8dp">
 
             <EditText
                 android:id="@+id/edt_search"
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="8dp" />
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@id/btn_search"
+                android:hint="ค้นหาด้วยชื่อสินค้า" />
 
             <Button
                 android:id="@+id/btn_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/edt_search"
-                android:text="Search"
-                android:backgroundTint="@color/secondary_500"/>
+                android:backgroundTint="@color/secondary_500"
+                android:text="Search" />
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rev_product_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="3dp" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 </ScrollView>

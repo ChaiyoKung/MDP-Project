@@ -103,7 +103,7 @@ class EmpOrderDetailActivity : AppCompatActivity() {
 
                     if (!body?.order_track.isNullOrEmpty()) {
                         edt_order_track.setText(body?.order_track)
-                        btn_getProduct.isEnabled =  true
+                        btn_getProduct.isEnabled = true
                     } else {
                         btn_save.isEnabled = false
                     }
@@ -111,6 +111,7 @@ class EmpOrderDetailActivity : AppCompatActivity() {
                     if (body?.status_id.toString().toInt() == 4) {
                         edt_order_track.isEnabled = false
                         btn_save.visibility = View.INVISIBLE
+                        btn_getProduct.visibility = View.INVISIBLE
                     }
                 }
             }

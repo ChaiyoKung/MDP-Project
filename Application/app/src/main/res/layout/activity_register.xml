@@ -68,7 +68,7 @@
             android:id="@+id/edt_lname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="สกุล"
+            android:hint="นามสกุล"
             android:inputType="textShortMessage" />
 
         <EditText

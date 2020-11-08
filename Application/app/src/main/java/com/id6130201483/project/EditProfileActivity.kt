@@ -81,6 +81,35 @@ class EditProfileActivity : AppCompatActivity() {
         })
     }
 
+    private fun isFormValid(): Boolean {
+        fun notValidToast(text: String) {
+            Toast.makeText(this, "กรุณากรอก$text", Toast.LENGTH_SHORT).show()
+        }
+
+        if (edt_profile_fname.text.isNullOrEmpty()) {
+            notValidToast("ชื่อ")
+            edt_profile_fname.requestFocus()
+            return false
+        } else if (edt_profile_lname.text.isNullOrEmpty()) {
+            notValidToast("นามสกุล")
+            edt_profile_lname.requestFocus()
+            return false
+        } else if (edt_profile_address.text.isNullOrEmpty()) {
+            notValidToast("ที่อยู่")
+            edt_profile_address.requestFocus()
+            return false
+        } else if (edt_profile_email.text.isNullOrEmpty()) {
+            notValidToast("อีเมล")
+            edt_profile_email.requestFocus()
+            return false
+        } else if (edt_profile_tel.text.isNullOrEmpty()) {
+            notValidToast("เบอร์โทรศัพท์")
+            edt_profile_tel.requestFocus()
+            return false
+        }
+        return true
+    }
+
     private fun clickSave(
         cid: Int,
         email: String,
@@ -90,23 +119,25 @@ class EditProfileActivity : AppCompatActivity() {
         tel: String,
         image: String
     ) {
-        editProfileAPI.updateCustomer(cid, email, fname, lname, address, tel, image)
-            .enqueue(object : Callback<Customer> {
-                override fun onResponse(call: Call<Customer>, response: Response<Customer>) {
-                    if (response.isSuccessful) {
-                        Toast.makeText(
-                            this@EditProfileActivity,
-                            "แก้ไขข้อมูลสำเร็จ",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        finish()
+        if (isFormValid()) {
+            editProfileAPI.updateCustomer(cid, email, fname, lname, address, tel, image)
+                .enqueue(object : Callback<Customer> {
+                    override fun onResponse(call: Call<Customer>, response: Response<Customer>) {
+                        if (response.isSuccessful) {
+                            Toast.makeText(
+                                this@EditProfileActivity,
+                                "แก้ไขข้อมูลสำเร็จ",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            finish()
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<Customer>, t: Throwable) {
-                    t.printStackTrace()
-                }
-            })
+                    override fun onFailure(call: Call<Customer>, t: Throwable) {
+                        t.printStackTrace()
+                    }
+                })
+        }
     }
 
     private fun clearImageURL() {

@@ -101,23 +101,40 @@ class TransportActivity : AppCompatActivity() {
         }
     }
 
+    private fun isFromValid(): Boolean {
+        if (cid == null) return false
+        if (edt_address.text.isNullOrEmpty()) {
+            Toast.makeText(this, "กรุณากรอกที่อยู่", Toast.LENGTH_SHORT).show()
+            edt_address.requestFocus()
+            return false
+        }
+        return true
+    }
+
     private fun save() {
-        if (cid != null) {
+        if (isFromValid()) {
             transAPI.updateAddressAndTransport(cid!!, edt_address.text.toString(), getTransportID())
                 .enqueue(object : Callback<Transport> {
                     override fun onResponse(call: Call<Transport>, response: Response<Transport>) {
                         if (response.isSuccessful) {
-                            Toast.makeText(this@TransportActivity,"อัปเดทข้อมูลสำเร็จ",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@TransportActivity,
+                                "อัปเดทข้อมูลสำเร็จ",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             finish()
                         } else {
-                            Toast.makeText(this@TransportActivity,"อัปเดทข้อมูลไม่สำเร็จ",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@TransportActivity,
+                                "อัปเดทข้อมูลไม่สำเร็จ",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
 
                     override fun onFailure(call: Call<Transport>, t: Throwable) {
                         t.printStackTrace()
                     }
-
                 })
         }
     }

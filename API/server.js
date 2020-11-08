@@ -368,7 +368,7 @@ app.put("/update-customer-profile/:cid", function (req, res) {
 });
 
 app.get("/select-product", function (req, res) {
-  dbConn.query("SELECT * FROM `product`", function (error, results, fields) {
+  dbConn.query("SELECT * FROM `product` ORDER BY `product_id` DESC", function (error, results, fields) {
     if (error) throw error;
     res.send(results);
   });
