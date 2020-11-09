@@ -25,6 +25,7 @@ class ProductActivity : AppCompatActivity() {
     var currentProductID: Int? = null
     var currentAmount: Int? = null
     var currentOrderID: Int? = null
+    var pid: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +35,8 @@ class ProductActivity : AppCompatActivity() {
         actionBar!!.title = "สินค้า"
         actionBar.setDisplayHomeAsUpEnabled(true)
 
-        val pid = intent.getIntExtra("pid", 0)
+        pid = intent.getIntExtra("pid", 0)
 
-        callProduct(pid)
         callOrderidForCustomer(CustomerStore.id!!)
 
         iv_product_image.setOnClickListener {
@@ -62,6 +62,11 @@ class ProductActivity : AppCompatActivity() {
                 )
             }
         }
+    }
+
+    override fun onResume() {
+        callProduct(pid)
+        super.onResume()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -214,6 +219,7 @@ class ProductActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         Toast.makeText(this@ProductActivity, toastSuccessText, Toast.LENGTH_SHORT)
                             .show()
+                        this@ProductActivity.recreate()
                     }
                 }
 

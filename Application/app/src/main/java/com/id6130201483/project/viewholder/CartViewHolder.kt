@@ -31,7 +31,7 @@ class CartViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnCreateC
         v: View?,
         menuInfo: ContextMenu.ContextMenuInfo?
     ) {
-        val delete = menu?.add(0, 1, 1, "Delete")
+        val delete = menu?.add(0, 1, 1, "ลบรายการนี้")
         delete?.setOnMenuItemClickListener(clickMenu)
     }
 
